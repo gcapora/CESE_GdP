@@ -1,13 +1,11 @@
 \documentclass[
 11pt, % The default document font size, options: 10pt, 11pt, 12pt
-codirector, % Uncomment to add a codirector to the title page
+%codirector, % Uncomment to add a codirector to the title page
 ]{charter} 
 
 
-
-
 % El títulos de la memoria, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \ttitle
-\titulo{Título del proyecto} 
+\titulo{Interfaz de señales para prácticas de laboratorio} 
 
 % Nombre del posgrado, se usa en la carátula y se puede usar el cualquier lugar del documento con el comando \degreename
 \posgrado{Carrera de Especialización en Sistemas Embebidos} 
@@ -17,18 +15,18 @@ codirector, % Uncomment to add a codirector to the title page
 %\posgrado{Maestría en Internet de las cosas}
 
 % Tu nombre, se puede usar el cualquier lugar del documento con el comando \authorname
-\autor{Nombre del Autor} 
+\autor{Guillermo Federico Caporaletti} 
 
 % El nombre del director y co-director, se puede usar el cualquier lugar del documento con el comando \supname y \cosupname y \pertesupname y \pertecosupname
-\director{Nombre del Director}
-\pertenenciaDirector{pertenencia} 
+\director{\textcolor{red}{Nombre del Director}}
+\pertenenciaDirector{\textcolor{red}{pertenencia}} 
 % FIXME:NO IMPLEMENTADO EL CODIRECTOR ni su pertenencia
 \codirector{John Doe} % para que aparezca en la portada se debe descomentar la opción codirector en el documentclass
 \pertenenciaCoDirector{FIUBA}
 
 % Nombre del cliente, quien va a aprobar los resultados del proyecto, se puede usar con el comando \clientename y \empclientename
-\cliente{Nombre del cliente}
-\empresaCliente{Empresa del cliente}
+\cliente{Ing. Federico D'Angiolo}
+\empresaCliente{Universidad Nacional de Avellaneda}
 
 % Nombre y pertenencia de los jurados, se pueden usar el cualquier lugar del documento con el comando \jurunoname, \jurdosname y \jurtresname y \perteunoname, \pertedosname y \pertetresname.
 \juradoUno{Nombre y Apellido (1)}
@@ -38,9 +36,9 @@ codirector, % Uncomment to add a codirector to the title page
 \juradoTres{Nombre y Apellido (3)}
 \pertenenciaJurTres{pertenencia (3)}
  
-\fechaINICIO{30 de abril de 2021}		%Fecha de inicio de la cursada de GdP \fechaInicioName
-\fechaFINALPlan{18 de junio de 2021} 	%Fecha de final de cursada de GdP
-\fechaFINALTrabajo{15 de mayo de 2022}	%Fecha de defensa pública del trabajo final
+\fechaINICIO{20 de octubre de 2022}		%Fecha de inicio de la cursada de GdP \fechaInicioName
+\fechaFINALPlan{8 de diciembre de 2022} 	%Fecha de final de cursada de GdP
+\fechaFINALTrabajo{diciembre de 2023}	%Fecha de defensa pública del trabajo final
 
 
 \begin{document}
@@ -92,7 +90,7 @@ Buenos Aires, \fechaInicioName
 
 \vspace{2cm}
 
-Por medio de la presente se acuerda con el Ing. \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'', consistirá esencialmente en \textcolor{red}{la implementación de un prototipo de un sistema de control de temperatura de un calefón}, y tendrá un presupuesto preliminar estimado de \textcolor{red}{600} hs de trabajo y \textcolor{red}{\$XXX}, con fecha de inicio \fechaInicioName\hspace{1px} y fecha de presentación pública \fechaFinalName.
+Por medio de la presente se acuerda con el Ing. \authorname\hspace{1px} que su Trabajo Final de la \degreename\hspace{1px} se titulará ``\ttitle'', consistirá esencialmente en la implementación de un prototipo de un equipo con conexión a PC que posea generadores y capturadores, y tendrá un presupuesto preliminar estimado de 600 hs de trabajo y \$100.000, con fecha de inicio \fechaInicioName\hspace{1px} y fecha de presentación pública en \fechaFinalName.
 
 Se adjunta a esta acta la planificación inicial.
 
@@ -111,138 +109,119 @@ Se adjunta a esta acta la planificación inicial.
 
 
 
-
 \section{1. Descripción técnica-conceptual del proyecto a realizar}
 \label{sec:descripcion}
 
+\begin{consigna}{black}
+El presente proyecto busca desarrollar un equipo de baja complejidad y bajo costo para la realización de prácticas de laboratorio en el ámbito educativo. Se destinará inicialmente a cursos de los primeros años de las carreras de ingeniería aunque potencialmente su alcance podría llegar al nivel secundario. En rasgos generales, el equipo integra generadores de señal, entradas capturadoras de señal, puertos de uso diverso y conexión a PC para su operación. 
 
-\begin{consigna}{red} % El bloque "consigna" se usa para poner texto en rojo y dar una pequeña ayuda sobre cómo completar la sección
+En las carreras de ciencias físicas y de ingeniería, la práctica es la base fundamental de la formación. En particular se destacan las prácticas de laboratorio, que se desarrollan desde los primeros años de la carrera. Para estas prácticas, inicialmente son necesarios equipos que no requieren por lo general una alta exigencia en cuanto a recursos electrónicos. Sin embargo, los equipos comerciales disponibles tienen un precio privativo, lo que limita su disponibilidad en las clases y dificulta por este motivo el proceso de enseñanza. El alto precio de los equipos comerciales disponibles se explica no tanto por su costo de desarrollo sino por la escasa oferta en este rubro y porque son equipos importados. Esta limitación no guarda relación con la baja complejidad de estos equipos y la alta capacidad de desarrollo en nuestro país.  
 
-El objetivo es que el lector en una o dos páginas entienda de qué se trata el proyecto y cuáles son sus desafíos, su motivación y su importancia.
+En el presente proyecto se propone desarrollar un equipo económico y adecuado a cubrir esta necesidad. El diseño incluirá la selección del hardware adecuado, el desarrollo del firmware necesario para el sistema embebido y la implementación de un prototipo funcional. El equipo será operado mediante una PC, para lo cual se implementará una interfaz mínima a través de una  terminal.
 
-Se debe destacar claramente cuál es el valor que agrega el proyecto a realizar. ``El presente proyecto se destaca especialmente por incorporar tal cosa... Esto lo diferencia de otros sistemas similares en que ...''
+Se propone una estrategia de diseño abierto, que facilite ampliar su desarrollo principalmente en el ámbito de la comunidad universitaria. El desarrollo de hardware y código abierto permite facilitar la cooperación entre distintas instituciones. Esto sería factible, ante todo, porque el desarrollo propuesto cubriría una necesidad de las carreras de ingeniería y ciencias físicas, naturales y exactas en general. 
 
-Puede ser útil incluir en esta sección la respuesta a alguna de estas preguntas:
+Vinculado a su finalidad, un aspecto importante del diseño es tener especial atención en la protección del equipo frente a su utilización incorrecta. Esto es de particular interés dado que en cualquier práctica de una clase pueden ocurrir conexiones erróneas que perjudican el funcionamiento del equipo o incluso lo dañan. Los y las estudiantes aprenden con estos errores, pero necesitamos evitar que en estos intentos los equipos entren en desuso debido a la falta de protecciones y/o alto costo de reparación. Una posibilidad es incorporar un diseño modular que facilite su reparación en caso de daños.
 
+Un posible desarrollo posterior sería la capacidad de conectarse a internet, de modo de permitir la realización de prácticas a distancia. Esto podría permitir ser operado mediante un celular y/o almacenar las mediciones directamente en la nube. También  podría permitir la realización de prácticas que excedan el horario de las clases sincrónicas presenciales. Esto permitiría programar experiencias de laboratorio largas, ya sea porque involucren muchas etapas o porque sus procesos físicos sean muy lentos. 
+
+Lo innovador de este proyecto será el desarrollo de un equipo interfaz de bajo costo, que contribuya a las prácticas de laboratorio en el ámbito educativo nacional. Actualmente, el precio de una interfaz importada con estas funcionalidades es de U\$S 1710 CIP (en Aeropuerto de Ezeiza). Vinculado a esto, otra innovación será la implementación de una solución con hardware y código abierto. Esto podrá facilitar el desarrollo de mejoras posteriores (como ser la conectividad a internet) y la cooperación entre instituciones universitarias.
+
+En la Figura \ref{fig:diagBloques} se muestra un esquema del equipo, compuesto por:
 \begin{itemize}
-	\item ¿Cómo se vincula este proyecto con la misión de la organización?
-	\item ¿Cómo se inserta este proyecto en el modelo de negocio de la organización?
-	\item ¿Ayuda a la explicación si se incluye un lienzo Canvas del Modelo de Negocio?
-	\item ¿En qué estado del ciclo de vida está el producto que se desea reemplazar o mejorar?
-	\item ¿Cuáles son las necesidades que debe satisfacer?
-	\item ¿Por dónde pasa la innovación?
+	\item Microcontrolador: En principio, buscaremos un modelo dentro de la familia de STM32 (STMicroelectronics).
+	\item Salidas DAC's: Al menos buscamos dos conversores. 
+	\item Amplificadores de salida.
+	\item Entradas ADC's: Al menos dos.
+	\item Acondicionadores de señal de entrada.
+	\item Puertos de uso diverso (entrada y/o salida): Estos puertos permitirían conectarse a sensores diversos como termómetros, medidores de posición y otros elementos que manejen un protocolo digital o representen señales lentas.
+	\item Fuente de alimentación simétrica de 12 V.
+	\item Conexión a terminal en PC vía puerto USB, para manejo de la interfaz y almacenamiento de las señales medidas.
 \end{itemize}
-
-La descripción técnica-conceptual \textbf{debe incluir al menos un diagrama en bloques del sistema} y una frase como la siguiente: ``En la Figura \ref{fig:diagBloques} se presenta el diagrama en bloques del sistema. Se observa que...''. Luego recién más abajo de haber puesto esta frase, se pone la figura. La regla es que las figuras nunca pueden ir antes de ser mencionadas en el texto, porque sino el lector no entiende por qué de pronto aparece una figura.
 
 %\vspace{25px}
 
 \begin{figure}[htpb]
 \centering 
-\includegraphics[width=.5\textwidth]{./Figuras/diagBloques.png}
+\includegraphics[width=1\textwidth]{./Figuras/diagBloques.png}
 \caption{Diagrama en bloques del sistema}
 \label{fig:diagBloques}
 \end{figure}
-
 \vspace{25px}
-
-El tamaño de la tipografía en TODAS las figuras debe ser adecuado para que NO pase lo que ocurre acá, donde el lector debe esforzarse para poder leer el texto. Los colores usados en el diagrama deben ser adecuados, tal que ayuden a comprender mejor el diagrama, preferentemente en la gama de colores pastel.
 \end{consigna}
 
 
 \section{2. Identificación y análisis de los interesados}
 \label{sec:interesados}
-
-\begin{consigna}{red} 
-Nota: (borrar esto y todas las consignas en color rojo antes de entregar este documento).
- 
-Es inusual que una misma persona esté en más de un rol, incluso en proyectos chicos.
- 
-Si se considera que una persona cumple dos o más roles, entonces sólo dejarla en el rol más importante. Por ejemplo:
-
-\begin{itemize}
-\item Si una persona es Cliente pero también colabora u orienta, dejarla solo como Cliente.
-\item Si una persona es el Responsable, no debe ser colocado también como Miembro del equipo.
-\end{itemize}
-
-Pero en cambio sí es usual que el Cliente y el Auspiciante sean el mismo, por ejemplo.
-
+\begin{consigna}{black} 
 \begin{table}[ht]
 %\caption{Identificación de los interesados}
 %\label{tab:interesados}
-\begin{tabularx}{\linewidth}{@{}|l|X|X|l|@{}}
+\begin{tabularx}{\linewidth}{@{}|l|X|X|X|@{}}
 \hline
 \rowcolor[HTML]{C0C0C0} 
-Rol           & Nombre y Apellido & Organización 	& Puesto 	\\ \hline
-Auspiciante   &                   &              	&        	\\ \hline
-Cliente       & \clientename      &\empclientename	&        	\\ \hline
-Impulsor      &                   &              	&        	\\ \hline
-Responsable   & \authorname       & FIUBA        	& Alumno 	\\ \hline
-Colaboradores &                   &              	&        	\\ \hline
-Orientador    & \supname	      & \pertesupname 	& Director Trabajo final \\ \hline
-Equipo        & miembro1 \newline 
-				miembro2          &              	&        	\\ \hline
-Opositores    &                   &              	&        	\\ \hline
-Usuario final &                   &              	&        	\\ \hline
+Rol           & Nombre y Apellido & Organización 	& Puesto 		\\ \hline
+Auspiciante   & UNDAV			  & - 				& - 			\\ \hline
+Cliente       & \clientename      & UNDAV			& LASE	     	\\ \hline
+Impulsor	  & -				  &	-				& -				\\ \hline
+Responsable   & \authorname       & FIUBA        	& Alumno 		\\ \hline
+Orientador    & \supname	      & \pertesupname 	& Director del\newline Trabajo final	\\ \hline
+Equipo        & Miguel Dall'Osso \newline Federico Díaz \newline Matías Loiseau \newline Sol Strapko
+			  & UNDAV \newline UNDAV \newline UNDAV \newline UNDAV
+			  & Profesor \newline Profesor \newline Docente \newline Estudiante		\\ \hline
+Opositores    & Pasco Scientific  & -             	& -      		\\ \hline
+Usuario final & estudiantes de \newline ingeniería & -		& -       		\\ \hline
 \end{tabularx}
 \end{table}
 
-El Director suele ser uno de los Orientadores.
-
-No dejar celdas vacías; si no hay nada que poner en una celda colocar un signo ``-''.
-
-No dejar filas vacías; si no hay nada que poner en una fila entonces eliminarla.
-
-Es deseable listar a continuación las principales características de cada interesado.
- 
-Por ejemplo:
 \begin{itemize}
-	\item Auspiciante: es riguroso y exigente con la rendición de gastos. Tener mucho cuidado con esto.
-	\item Equipo: Juan Perez, suele pedir licencia porque tiene un familiar con una enfermedad. Planificar considerando esto.
-	\item Orientador: María Gómez va a poder ayudar mucho con la definición de los requerimientos.
+	\item La Universidad Nacional de Avellaneda (UNDAV) es la institución que hará uso de este desarrollo, lo que permitirá probarlo y realizar su puesta a punto. 
+	\item El Ing. Federico D'Angiolo integra el Laboratorio Abierto de Sistemas Embebidos de la UNDAV, con actividades fundamentalmente pedagógicas. 
+	\item Miguel Dall'Osso es profesor a cargo de las materias de Física de la UNDAV, uno de los ámbitos que requieren aumentar la disponibilidad de este tipo de equipos. 
 \end{itemize}
-
 \end{consigna}
-
 
 
 \section{3. Propósito del proyecto}
 \label{sec:proposito}
 
-\begin{consigna}{red}
-¿Por qué se hace el proyecto? ¿Qué se quiere lograr? 
-
-Se recomienda que sea solo un párrafo que empiece diciendo ``El propósito de este proyecto es...''.
+\begin{consigna}{black}
+El propósito del proyecto es lograr un diseño sencillo y fácilmente reproducible para ampliar la oferta de este tipo de equipos destinados a la enseñanza de las ciencias físicas y las ingenierías. Por este motivo se propone un diseño de código y hardware abierto. Esto implica, a su vez, aprovechar las soluciones funcionales ya disponibles en el mercado y que permitan simplificar el diseño de la o las placas necesarias. 
 \end{consigna}
+
 
 \section{4. Alcance del proyecto}
 \label{sec:alcance}
 
-\begin{consigna}{red}
-¿Qué se incluye y que no se incluye en este proyecto?
+\begin{consigna}{black}
+El proyecto implica:
+\begin{itemize}
+	\item Seleccionar un microcontrolador adecuado a las especificaciones.  
+	\item Analizar la utilización de una placa de desarrollo.
+	\item Diseñar la placa principal y circuitos analógicos de acondicionamiento y amplificación de las señales.
+	\item Elaborar el código de manejo de los dispositivos y de conexión con la PC.
+	\item Elaborar un manual de referencia con los comandos definidos para controlar al equipo desde la PC.
+	\item Construir un prototipo funcional.
+\end{itemize}
 
-Se refiere al trabajo a hacer para entregar el producto o resultado especificado. 
+El proyecto no incluye la elaboración de una Interfaz Humano-Máquina (HMI, por sus siglas en inglés) para la operación desde la PC. Ésta deberá hacerse mediante una Terminal utilizando los comandos definidos previamente. 
 
-Explicitar todo lo quede comprendido dentro del alcance del proyecto.
-
-Explicitar además todo lo que no quede incluido (``El presente proyecto no incluye...'')
-
+Tampoco se incluirá una pantalla gráfica en el equipo desarrollado, porque esto encarece el equipo y el desarrollo del mismo. Las señales serán graficadas en la PC a partir de los datos recibidos por USB.
 \end{consigna}
 
 
 \section{5. Supuestos del proyecto}
 \label{sec:supuestos}
 
-\begin{consigna}{red}
-``Para el desarrollo del presente proyecto se supone que: ...''
-
+\begin{consigna}{black}
+El desarrollo del presente proyecto supone:
 \begin{itemize}
-	\item Supuesto 1
-	\item Supuesto 2...
+	\item La posibilidad de utilizar los equipos de laboratorio disponibles en la UNDAV y sus recursos.
+	\item Un costo de componentes bajo, en relación con el precio de la oferta actual del equipo.
+	\item El sostenimiento del trabajo en equipo de los y las docentes con interés en resolver esta carencia. 
 \end{itemize}
-
-Por ejemplo, se podrían incluir supuestos respecto a disponibilidad de tiempo y recursos humanos y materiales, sobre la factibilidad técnica de distintos aspectos del proyecto, sobre otras cuestiones que sean necesarias para el éxito del proyecto como condiciones macroeconómicas o reglamentarias.
 \end{consigna}
+
 
 \section{6. Requerimientos}
 \label{sec:requerimientos}
